@@ -12,4 +12,4 @@ cp -v src/gdal.spec $specdir
 
 rpmbuild -ba $specdir/gdal.spec
 
-cp -rfvu rpmbuild/RPMS rpmbuild/SRPMS /src
+cp -rfvu rpmbuild/RPMS rpmbuild/SRPMS dest/
