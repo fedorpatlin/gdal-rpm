@@ -23,7 +23,7 @@
 
 
 # Tests can be of a different version
-%global testversion 1.11.2
+%global testversion 1.11.3
 %global run_tests 1
 
 %global with_spatialite 1
@@ -40,7 +40,7 @@
  
 
 Name:      gdal
-Version:   1.11.2
+Version:   1.11.3
 Release:   1%{?dist}
 Summary:   GIS file format library
 Group:     System Environment/Libraries
@@ -49,7 +49,7 @@ URL:       http://www.gdal.org
 # Source0:   http://download.osgeo.org/gdal/gdal-%%{version}.tar.gz
 # See PROVENANCE.TXT-fedora and the cleaner script for details!
 
-Source0:   %{name}-%{version}-fedora.tar.xz
+Source0:   %{name}-%{version}.tar.xz
 Source1:   http://download.osgeo.org/%{name}/%{testversion}/%{name}autotest-%{testversion}.tar.gz
 Source2:   %{name}.pom
 
@@ -248,10 +248,10 @@ This package contains HTML and PDF documentation for GDAL.
 %global __provides_exclude_from ^%{python_sitearch}/.*\.so$
 
 %prep
-%setup -q -n %{name}-%{version}-fedora
+%setup -q -n %{name}-%{version}
 
 # Unpack tests to the same directory
-%setup -q -D -a 1 -n %{name}-%{version}-fedora
+%setup -q -D -a 1 -n %{name}-%{version}
 
 # Delete bundled libraries
 rm -rf frmts/zlib
@@ -509,12 +509,12 @@ cp -p swig/java/gdal.jar  \
     %{buildroot}%{_javadir}/%{name}.jar
 
 # Install Maven pom and update version number
-install -dm 755 %{buildroot}%{_mavenpomdir}
-install -pm 644 %{SOURCE2} %{buildroot}%{_mavenpomdir}/JPP-%{name}.pom
-sed -i 's|<version></version>|<version>%{version}</version>|' %{buildroot}%{_mavenpomdir}/JPP-%{name}.pom
+#install -dm 755 %{buildroot}%{_mavenpomdir}
+#install -pm 644 %{SOURCE2} %{buildroot}%{_mavenpomdir}/JPP-%{name}.pom
+#sed -i 's|<version></version>|<version>%{version}</version>|' %{buildroot}%{_mavenpomdir}/JPP-%{name}.pom
 
 # Create depmap fragment
-%add_maven_depmap JPP-%{name}.pom %{name}.jar
+#%add_to_maven_depmap JPP-%{name}.pom %{name}.jar
 
 # 775 on the .so?
 # copy JNI libraries and links, non versioned link needed by JNI
@@ -531,7 +531,7 @@ cp -pr swig/java/java/org %{buildroot}%{_javadocdir}/%{name}
 # Install refmans
 for docdir in %{docdirs}; do
   pushd $docdir
-    path=%{_builddir}/%{name}-%{version}-fedora/refman
+    path=%{_builddir}/%{name}-%{version}/refman
     mkdir -p $path/html/$docdir
     cp -r html $path/html/$docdir
 
@@ -637,7 +637,7 @@ for f in 'GDAL*' BandProperty ColorAssociation CutlineTransformer DatasetPropert
   rm -rf %{buildroot}%{_mandir}/man1/$f.1*
 done
 #TODO: What's that?
-rm -f %{buildroot}%{_mandir}/man1/*_%{name}-%{version}-fedora_apps_*
+rm -f %{buildroot}%{_mandir}/man1/*_%{name}-%{version}_apps_*
 
 %check
 %if %{run_tests}
@@ -723,9 +723,19 @@ popd
 %{_libdir}/pkgconfig/%{name}.pc
 
 # Can I even have a separate Java package anymore?
-%files java -f .mfiles
+%files java
 %doc swig/java/apps
-%{_jnidir}/%{name}/
+#%{_jnidir}/%{name}/
+%{_jnidir}/%{name}/libgdalconstjni.so
+%{_jnidir}/%{name}/libgdalconstjni.so.1*
+%{_jnidir}/%{name}/libgdaljni.so
+%{_jnidir}/%{name}/libgdaljni.so.1*
+%{_jnidir}/%{name}/libogrjni.so
+%{_jnidir}/%{name}/libogrjni.so.1*
+%{_jnidir}/%{name}/libosrjni.so
+%{_jnidir}/%{name}/libosrjni.so.1*
+/usr/share/java/gdal.jar
+/etc/maven/fragments/gdal
 
 %files javadoc
 %{_javadocdir}/%{name}
