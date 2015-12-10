@@ -61,7 +61,7 @@ RUN mkdir -p rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}\
   && curl http://download.osgeo.org/gdal/1.11.3/gdal-1.11.3.tar.xz > rpmbuild/SOURCES/gdal-1.11.3.tar.xz\
   && curl http://download.osgeo.org/gdal/1.11.3/gdalautotest-1.11.3.tar.gz > rpmbuild/SOURCES/gdalautotest-1.11.3.tar.gz
 COPY docker-entrypoint.sh /bin/entrypoint.sh
-RUN chown +x /bin/entrypoint.sh
+RUN chmod +x /bin/entrypoint.sh
 ENTRYPOINT ["/bin/entrypoint.sh"]
 
 
