@@ -1,11 +1,12 @@
 FROM centos:6
 
 WORKDIR /root
-RUN rm -f /var/cache/yum/timedhosts.txt\
-  && echo "timeout=1" >> /etc/yum.conf\
-  && yum clean all\
+RUN echo "timeout=1" >> /etc/yum.conf\
   && yum --verbose install -y epel-release\
-  && yum clean all\
+  && yum clean all && echo "" > /var/log/yum.log
+
+RUN rm -f /var/cache/yum/timedhosts.txt\
+  && yum clean all && yum makecache\
   && yum install -y tar\
 	gcc\
 	gcc-c++\
