@@ -4,7 +4,7 @@ WORKDIR /root
 RUN rm -f /var/cache/yum/timedhosts.txt\
   && echo "timeout=1" >> /etc/yum.conf\
   && yum clean all\
-  && yum --verbose --noplugins install -y epel-release\
+  && yum --verbose install -y epel-release\
   && yum clean all\
   && yum install -y tar\
 	gcc\
