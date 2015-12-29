@@ -1,0 +1,4 @@
+job-rpm:
+  script: ./build.sh
+  artifacts:
+    untracked: true
