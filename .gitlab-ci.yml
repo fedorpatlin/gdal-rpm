@@ -1,4 +1,4 @@
 job-rpm:
-  script: ./build.sh
+  script: sudo ./build.sh
   artifacts:
     untracked: true
