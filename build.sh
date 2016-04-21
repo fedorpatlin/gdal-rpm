@@ -12,5 +12,5 @@ else
     YUM_COMMAND=""
 fi
 sed -e "s+\$YUM_COMMAND_TEMPLATE+$YUM_COMMAND+" docker/Dockerfile.template > docker/Dockerfile
-docker build --force-rm -t $projectname docker/ 
-docker run -it --rm -v $workdir/src:/root/src -v $workdir/dest:/root/dest $projectname $projectname.spec
+docker build --force-rm -t $projectname docker/
+docker run  --rm -v $workdir/src:/root/src -v $workdir/dest:/root/dest $projectname $projectname.spec
