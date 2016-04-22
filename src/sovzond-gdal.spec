@@ -25,7 +25,7 @@ Group:		System Environment/Libraries
 License:	MIT
 URL:		http://www.gdal.org
 Source0:	%{srcname}-%{version}.tar.xz
-Source1:	gdalautotest-%{version}.tar.gz
+#Source1:	gdalautotest-%{version}.tar.gz
 Patch1: gdal-1.9.0-java.patch
 
 BuildRequires: ant

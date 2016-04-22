@@ -37,7 +37,7 @@
 %global spatialite "--without-spatialite"
 %endif
 %endif
- 
+
 
 Name:      gdal
 Version:   1.11.3
@@ -50,7 +50,7 @@ URL:       http://www.gdal.org
 # See PROVENANCE.TXT-fedora and the cleaner script for details!
 
 Source0:   %{name}-%{version}.tar.xz
-Source1:   http://download.osgeo.org/%{name}/%{testversion}/%{name}autotest-%{testversion}.tar.gz
+#Source1:   http://download.osgeo.org/%{name}/%{testversion}/%{name}autotest-%{testversion}.tar.gz
 Source2:   %{name}.pom
 
 # Cleaner script for the tarball
